@@ -34,7 +34,15 @@ function Sidebar({ mobileOpen, onClose }) {
     {
       title: 'Settings',
       items: [
-        { to: '/permission', label: 'Permission', icon: FaUserShield },
+        { to: '/roles', label: 'Role List', icon: FaUserShield },
+        { to: '/roles/add', label: 'Add Role', icon: FaPlus },
+      ],
+    },
+    {
+      title: 'Users',
+      items: [
+        { to: '/users/add', label: 'Add User', icon: FaPlus },
+        { to: '/users', label: 'User List', icon: FaList },
       ],
     },
   ];
