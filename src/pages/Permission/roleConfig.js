@@ -7,6 +7,7 @@ export const MODULES = [
   'roles',
   'users',
   'settings',
+  "suppliers"
 ];
 
 export const AVAILABLE_ACTIONS = ['create', 'update', 'delete', 'get'];

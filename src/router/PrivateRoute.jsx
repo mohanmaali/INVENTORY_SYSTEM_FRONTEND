@@ -1,11 +1,11 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import useAuthStore from '../store/authStore';
+import { useSelector } from 'react-redux';
 
 function PrivateRoute({ children }) {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const token = useSelector((state) => state.auth.token);
   const location = useLocation();
 
-  if (!isAuthenticated) {
+  if (!token) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

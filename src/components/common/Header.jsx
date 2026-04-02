@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Button, Input } from '../ui';
 import { FaSearch, FaBell, FaUserCircle, FaBars } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 
 function Header({ onOpenMobile }) {
   const navigate = useNavigate();

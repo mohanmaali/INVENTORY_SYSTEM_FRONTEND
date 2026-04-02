@@ -27,8 +27,8 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
-      // Do not perform a hard redirect here. Let callers and AuthContext
-      // handle navigation so login/register flows can react appropriately.
+      // Do not perform a hard redirect here. Let callers handle navigation
+      // so login/register flows can react appropriately.
     }
     return Promise.reject(error);
   }
