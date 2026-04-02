@@ -6,8 +6,6 @@ dist/
 build/
 
 # Environment files
-.env
-.env.local
 .env.*.local
 
 # IDE
@@ -30,3 +28,4 @@ coverage/
 # Cache
 .cache/
 .vite/
+config.bat

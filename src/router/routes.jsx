@@ -6,7 +6,12 @@ import Inventory from '../pages/Inventory/Inventory';
 import Sales from '../pages/Sales/Sales';
 import Purchase from '../pages/Purchase/Purchase';
 import Reports from '../pages/Reports/Reports';
-import Permission from '../pages/Permission/Permission';
+import ListRoles from '../pages/Permission/ListRoles';
+import AddRole from '../pages/Permission/AddRole';
+import EditRole from '../pages/Permission/EditRole';
+import AddUser from '../pages/Users/AddUser';
+import ListUsers from '../pages/Users/ListUsers';
+import EditUser from '../pages/Users/EditUser';
 import Layout from '../components/common/Layout';
 
 export const routes = [
@@ -46,8 +51,33 @@ export const routes = [
     protected: false,
   },
   {
-    path: '/permission',
-    element: <Layout><Permission /></Layout>,
+    path: '/roles',
+    element: <Layout><ListRoles /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/roles/add',
+    element: <Layout><AddRole /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/roles/:id/edit',
+    element: <Layout><EditRole /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/users',
+    element: <Layout><ListUsers /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/users/add',
+    element: <Layout><AddUser /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/users/:id/edit',
+    element: <Layout><EditUser /></Layout>,
     protected: false,
   },
   {

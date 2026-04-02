@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 function Modal({ isOpen, onClose, children, className = '' }) {
   const overlayRef = useRef(null);
@@ -21,16 +22,19 @@ function Modal({ isOpen, onClose, children, className = '' }) {
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="fixed inset-0 z-[1000] overflow-y-auto bg-black/50 p-4"
       onClick={(e) => e.target === overlayRef.current && onClose()}
     >
-      <div className={`bg-white rounded-lg shadow-xl max-w-lg w-full mx-4 ${className}`}>
-        {children}
+      <div className="flex min-h-screen items-center justify-center">
+        <div className={`w-full max-w-lg rounded-lg bg-white shadow-xl ${className}`}>
+          {children}
+        </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
