@@ -12,6 +12,9 @@ import EditRole from '../pages/Permission/EditRole';
 import AddUser from '../pages/Users/AddUser';
 import ListUsers from '../pages/Users/ListUsers';
 import EditUser from '../pages/Users/EditUser';
+import ListSuppliers from '../pages/Suppliers/ListSuppliers';
+import AddSupplier from '../pages/Suppliers/AddSupplier';
+import EditSupplier from '../pages/Suppliers/EditSupplier';
 import Layout from '../components/common/Layout';
 
 export const routes = [
@@ -43,6 +46,21 @@ export const routes = [
   {
     path: '/purchase',
     element: <Layout><Purchase /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/purchase/suppliers',
+    element: <Layout><ListSuppliers /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/purchase/suppliers/add',
+    element: <Layout><AddSupplier /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/purchase/suppliers/:id/edit',
+    element: <Layout><EditSupplier /></Layout>,
     protected: false,
   },
   {

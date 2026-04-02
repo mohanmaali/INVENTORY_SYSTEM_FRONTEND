@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from './useAuth';
 
 const normalizeAction = (action) => {
   if (!action) return '';

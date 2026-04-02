@@ -22,7 +22,13 @@ function Sidebar({ mobileOpen, onClose }) {
       title: 'Purchase',
       items: [
         { to: '/purchase', label: 'Orders', icon: FaFileInvoiceDollar },
-        { to: '/purchase/suppliers', label: 'Suppliers', icon: FaUserShield },
+      ],
+    },
+    {
+      title: 'Suppliers',
+      items: [
+        { to: '/purchase/suppliers/add', label: 'Add Supplier', icon: FaPlus },
+        { to: '/purchase/suppliers', label: 'Supplier List', icon: FaUserShield },
       ],
     },
     {

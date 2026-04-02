@@ -1,1 +1,2 @@
-export { default as useAuthStore } from './authStore';
+export { default as store } from './store';
+export { default as authReducer } from './authSlice';
