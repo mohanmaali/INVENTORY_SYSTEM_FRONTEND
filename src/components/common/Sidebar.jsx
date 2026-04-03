@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { FaTachometerAlt, FaBoxes, FaShoppingCart, FaFileInvoiceDollar, FaChartBar, FaUserShield, FaPlus, FaList } from 'react-icons/fa';
+import { FaTachometerAlt, FaShoppingCart, FaChartBar, FaUserShield, FaPlus, FaList, FaClipboardList } from 'react-icons/fa';
 import SidebarGroup from './SidebarGroup';
 
 function Sidebar({ mobileOpen, onClose }) {
@@ -7,21 +7,17 @@ function Sidebar({ mobileOpen, onClose }) {
     {
       title: 'Inventory',
       items: [
-        { to: '/inventory/add', label: 'Add Item', icon: FaPlus },
-        { to: '/inventory', label: 'View Items', icon: FaList },
+        { to: '/inventory/add', label: 'Add Product', icon: FaPlus },
+        { to: '/inventory', label: 'Product List', icon: FaList },
       ],
     },
     {
-      title: 'Sales',
+      title: 'Orders',
       items: [
-        { to: '/sales', label: 'Orders', icon: FaShoppingCart },
-        { to: '/sales/customers', label: 'Customers', icon: FaUserShield },
-      ],
-    },
-    {
-      title: 'Purchase',
-      items: [
-        { to: '/purchase', label: 'Orders', icon: FaFileInvoiceDollar },
+        { to: '/orders/purchase/add', label: 'Add Purchase Order', icon: FaPlus },
+        { to: '/orders/purchase', label: 'Purchase Order List', icon: FaClipboardList },
+        { to: '/orders/sales/add', label: 'Add Sales Order', icon: FaShoppingCart },
+        { to: '/orders/sales', label: 'Sales Order List', icon: FaList },
       ],
     },
     {
@@ -29,6 +25,13 @@ function Sidebar({ mobileOpen, onClose }) {
       items: [
         { to: '/purchase/suppliers/add', label: 'Add Supplier', icon: FaPlus },
         { to: '/purchase/suppliers', label: 'Supplier List', icon: FaUserShield },
+      ],
+    },
+    {
+      title: 'Customers',
+      items: [
+        { to: '/customers/add', label: 'Add Customer', icon: FaPlus },
+        { to: '/customers', label: 'Customer List', icon: FaUserShield },
       ],
     },
     {

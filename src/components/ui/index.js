@@ -6,3 +6,8 @@ export { default as Table } from './Table';
 export { default as Form } from './Form';
 export { default as Pagination } from './Pagination';
 export { default as ConfirmationModal } from './ConfirmationModal';
+export { default as SelectInput } from './SelectInput';
+export { default as RemoteEntitySelect } from './RemoteEntitySelect';
+export { default as ProductSelect } from './ProductSelect';
+export { default as CustomerSelect } from './CustomerSelect';
+export { default as SupplierSelect } from './SupplierSelect';
