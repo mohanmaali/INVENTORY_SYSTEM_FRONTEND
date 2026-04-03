@@ -7,7 +7,13 @@ import usePermissions from '../../../hooks/usePermissions';
 import { createOrder, getOrderById, updateOrder } from '../../../services/orders';
 import { formatOrderCurrency, getOrderTypeLabel, inputClasses } from '../orderConfig';
 
-const createEmptyItem = () => ({ product: '', quantity: '1', unitPrice: '' });
+const createEmptyItem = () => ({
+  product: '',
+  quantity: '1',
+  unitPrice: '',
+  productName: '',
+  availableStock: null,
+});
 
 const normalizeItemsForPayload = (items) => {
   const mergedItems = new Map();
@@ -106,6 +112,11 @@ function OrderFormPage({ type, mode = 'create' }) {
                   item.unitPrice === undefined || item.unitPrice === null
                     ? ''
                     : String(item.unitPrice),
+                productName: item.product?.name || '',
+                availableStock:
+                  item.product?.quantity === undefined || item.product?.quantity === null
+                    ? null
+                    : Number(item.product.quantity),
               }))
             : [createEmptyItem()]
         );
@@ -156,6 +167,11 @@ function OrderFormPage({ type, mode = 'create' }) {
             ...item,
             product: value,
             unitPrice: item.unitPrice === '' && productData ? String(productData.price ?? '') : item.unitPrice,
+            productName: productData?.name || '',
+            availableStock:
+              productData?.quantity === undefined || productData?.quantity === null
+                ? null
+                : Number(productData.quantity),
           };
         }
         return { ...item, [field]: value };
@@ -178,6 +194,18 @@ function OrderFormPage({ type, mode = 'create' }) {
     if (normalizedItems.length === 0) return toast.error('Add at least one product to the order.');
     if (normalizedItems.some((item) => !item.product || !item.quantity || item.quantity < 1)) {
       return toast.error('Each order item must have a product and quantity.');
+    }
+    if (type === 'sale') {
+      const stockViolation = items.find((item) => {
+        if (!item.product) return false;
+        if (item.availableStock === null || item.availableStock === undefined) return false;
+        return Number(item.quantity || 0) > Number(item.availableStock);
+      });
+      if (stockViolation) {
+        return toast.error(
+          `Quantity for ${stockViolation.productName || 'selected product'} cannot exceed available stock (${stockViolation.availableStock}).`
+        );
+      }
     }
     if (type === 'purchase' && !supplierData) return toast.error('Supplier is required for purchase orders.');
     if (type === 'sale' && !customerData) return toast.error('Customer is required for sales orders.');
@@ -298,7 +326,9 @@ function OrderFormPage({ type, mode = 'create' }) {
                         <span className="font-medium text-gray-900">{formatOrderCurrency(subtotal)}</span>
                       </td>
                       <td className="px-4 py-3 text-gray-500">
-                        -
+                        {type === 'sale'
+                          ? (item.availableStock ?? '-')
+                          : '-'}
                       </td>
                       <td className="px-4 py-3">
                         <Button type="button" variant="ghost" className="h-8 w-8 p-0 text-red-500 hover:bg-red-50" onClick={() => setItems((current) => current.length === 1 ? current : current.filter((_, itemIndex) => itemIndex !== index))} disabled={items.length === 1}>

@@ -96,7 +96,7 @@ function EditSupplier() {
             <div className="flex flex-col gap-1 mb-6">
               <h2 className="text-lg font-semibold text-gray-900">Edit Supplier</h2>
               <p className="text-sm text-gray-500">
-                This page updates a supplier with <code>PUT /api/suppliers/:id</code>.
+                Update supplier information used across purchase workflows.
               </p>
             </div>
 

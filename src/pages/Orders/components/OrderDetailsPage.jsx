@@ -181,7 +181,22 @@ function OrderDetailsPage({ type }) {
                   <tbody className="divide-y divide-gray-200 bg-white">
                     {(order.items || []).map((item, index) => (
                       <tr key={`${item.product?._id || item.product?.id || index}`}>
-                        <td className="px-4 py-4"><div className="font-medium text-gray-900">{item.product?.name || 'Unknown product'}</div><div className="text-xs text-gray-500">{item.product?.sku || 'No SKU'}</div></td>
+                        <td className="px-4 py-4">
+                          <div className="font-medium text-gray-900">
+                            {item.product?._id || item.product?.id ? (
+                              <button
+                                type="button"
+                                className="text-primary hover:underline"
+                                onClick={() => navigate(`/inventory/${item.product?._id || item.product?.id}/edit`)}
+                              >
+                                {item.product?.name || 'Unknown product'}
+                              </button>
+                            ) : (
+                              item.product?.name || 'Unknown product'
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-500">{item.product?.sku || 'No SKU'}</div>
+                        </td>
                         <td className="px-4 py-4 text-gray-600">{item.quantity}</td>
                         <td className="px-4 py-4 text-gray-600">{formatOrderCurrency(item.unitPrice)}</td>
                         <td className="px-4 py-4 text-gray-600">{formatOrderCurrency(item.subtotal)}</td>

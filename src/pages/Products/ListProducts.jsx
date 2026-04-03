@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaExclamationTriangle, FaTrash } from 'react-icons/fa';
 import {
   Button,
   Card,
@@ -25,7 +25,7 @@ const filterSelectClasses =
 
 function ListProducts() {
   const navigate = useNavigate();
-  const permissions = usePermissions('products');
+  const permissions = usePermissions('inventory');
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
@@ -299,7 +299,21 @@ function ListProducts() {
                   return (
                     <tr key={productId} className="hover:bg-gray-50">
                       <td className="px-4 py-4">
-                        <div className="font-medium text-gray-900">{product.name}</div>
+                        <button
+                          type="button"
+                          className="font-medium text-primary hover:underline"
+                          onClick={() =>
+                            navigate(
+                              `/inventory/${productId}?page=${page}&limit=${limit}${
+                                search ? `&search=${encodeURIComponent(search)}` : ''
+                              }${status ? `&status=${encodeURIComponent(status)}` : ''}${
+                                category ? `&category=${encodeURIComponent(category)}` : ''
+                              }${supplier ? `&supplier=${encodeURIComponent(supplier)}` : ''}`
+                            )
+                          }
+                        >
+                          {product.name}
+                        </button>
                       </td>
                       <td className="px-4 py-4 text-gray-600">{product.sku}</td>
                       <td className="px-4 py-4 text-gray-600">{product.category || '-'}</td>
@@ -310,13 +324,23 @@ function ListProducts() {
                         {formatCurrency(product.price)}
                       </td>
                       <td className="px-4 py-4">
-                        <div className="flex flex-col">
-                          <span className="text-gray-700">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span
+                            className={
+                              product.isLowStock
+                                ? 'font-medium text-amber-900'
+                                : 'text-gray-700'
+                            }
+                          >
                             {product.quantity} {product.unit || 'pcs'}
                           </span>
                           {product.isLowStock && (
-                            <span className="text-xs font-medium text-red-600">
-                              Low stock
+                            <span
+                              className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-800"
+                              title={`At or below threshold (${product.lowStockThreshold ?? '—'})`}
+                            >
+                              <FaExclamationTriangle className="h-2.5 w-2.5 shrink-0" aria-hidden />
+                              Low
                             </span>
                           )}
                         </div>

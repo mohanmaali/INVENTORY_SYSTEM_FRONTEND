@@ -5,6 +5,7 @@ import NotFound from '../pages/NotFound/NotFound';
 import ListProducts from '../pages/Products/ListProducts';
 import AddProduct from '../pages/Products/AddProduct';
 import EditProduct from '../pages/Products/EditProduct';
+import ProductDetails from '../pages/Products/ProductDetails';
 import Sales from '../pages/Sales/Sales';
 import Purchase from '../pages/Purchase/Purchase';
 import OrderFormPage from '../pages/Orders/components/OrderFormPage';
@@ -54,6 +55,11 @@ export const routes = [
   {
     path: '/inventory/:id/edit',
     element: <Layout><EditProduct /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/inventory/:id',
+    element: <Layout><ProductDetails /></Layout>,
     protected: false,
   },
   {

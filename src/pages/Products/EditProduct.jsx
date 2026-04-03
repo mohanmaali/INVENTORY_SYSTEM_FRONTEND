@@ -19,7 +19,7 @@ function EditProduct() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const permissions = usePermissions('products');
+  const permissions = usePermissions('inventory');
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [history, setHistory] = useState([]);

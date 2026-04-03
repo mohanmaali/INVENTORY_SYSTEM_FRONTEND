@@ -14,7 +14,7 @@ function CustomerSelect({
       fetcher={getCustomers}
       mapOption={(customer) => ({
         value: customer._id || customer.id,
-        label: `${customer.name} (${customer.customerCode || customer.phone || 'No code'})`,
+        label: `${customer.name} (${customer.email || customer.customerCode || customer.phone || 'No contact'})`,
         data: customer,
       })}
       placeholder={placeholder}

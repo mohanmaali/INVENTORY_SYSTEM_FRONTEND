@@ -168,7 +168,7 @@ function ListRoles() {
       <Modal
         isOpen={Boolean(selectedRole)}
         onClose={() => setSelectedRole(null)}
-        className="max-w-2xl"
+        className="max-w-4xl"
       >
         {selectedRole && (
           <div className="p-6">
@@ -178,7 +178,7 @@ function ListRoles() {
                   {selectedRole.name} Permissions
                 </h2>
                 <p className="mt-1 text-sm text-gray-500">
-                  Module-wise access for this role.
+                  Module-wise access for this role ({(selectedRole.permissions || []).length} modules).
                 </p>
               </div>
               <Button
@@ -190,29 +190,49 @@ function ListRoles() {
               </Button>
             </div>
 
-            <div className="space-y-3">
-              {(selectedRole.permissions || []).map((permission) => (
-                <div
-                  key={`${selectedRole._id || selectedRole.id}-${permission.module}`}
-                  className="rounded-lg border border-gray-200 bg-gray-50 p-4"
-                >
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="font-medium capitalize text-gray-900">
-                      {permission.module}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {(permission.actions || []).map((action) => (
-                        <span
-                          key={`${permission.module}-${action}`}
-                          className="inline-flex rounded-md bg-white px-3 py-1 text-xs font-medium text-gray-700 border border-gray-200"
-                        >
-                          {mapApiActionToUi(action)}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="overflow-hidden rounded-lg border border-gray-200">
+              <div className="max-h-[55vh] overflow-y-auto">
+                <table className="min-w-full text-sm">
+                  <thead className="sticky top-0 bg-gray-50">
+                    <tr className="text-left text-xs uppercase tracking-wide text-gray-500">
+                      <th className="px-4 py-3 font-semibold w-48">Module</th>
+                      <th className="px-4 py-3 font-semibold">Permissions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {(selectedRole.permissions || []).map((permission) => (
+                      <tr key={`${selectedRole._id || selectedRole.id}-${permission.module}`}>
+                        <td className="px-4 py-3 align-top font-medium capitalize text-gray-900">
+                          {permission.module}
+                        </td>
+                        <td className="px-4 py-3">
+                          {(permission.actions || []).length > 0 ? (
+                            <div className="flex flex-wrap gap-2">
+                              {(permission.actions || []).map((action) => (
+                                <span
+                                  key={`${permission.module}-${action}`}
+                                  className="inline-flex rounded-md border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-700"
+                                >
+                                  {mapApiActionToUi(action)}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <span className="text-xs text-gray-500">No actions assigned</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                    {(selectedRole.permissions || []).length === 0 && (
+                      <tr>
+                        <td className="px-4 py-4 text-gray-500" colSpan={2}>
+                          No module permissions configured for this role.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}

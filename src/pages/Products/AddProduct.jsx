@@ -8,7 +8,7 @@ import ProductForm from './components/ProductForm';
 
 function AddProduct() {
   const navigate = useNavigate();
-  const permissions = usePermissions("products");
+  const permissions = usePermissions("inventory");
 
   const handleSubmit = async (payload) => {
     await createProduct(payload);
