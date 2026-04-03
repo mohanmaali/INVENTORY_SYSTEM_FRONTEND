@@ -2,9 +2,13 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 import NotFound from '../pages/NotFound/NotFound';
-import Inventory from '../pages/Inventory/Inventory';
+import ListProducts from '../pages/Products/ListProducts';
+import AddProduct from '../pages/Products/AddProduct';
+import EditProduct from '../pages/Products/EditProduct';
 import Sales from '../pages/Sales/Sales';
 import Purchase from '../pages/Purchase/Purchase';
+import OrderFormPage from '../pages/Orders/components/OrderFormPage';
+import OrderDetailsPage from '../pages/Orders/components/OrderDetailsPage';
 import Reports from '../pages/Reports/Reports';
 import ListRoles from '../pages/Permission/ListRoles';
 import AddRole from '../pages/Permission/AddRole';
@@ -15,6 +19,10 @@ import EditUser from '../pages/Users/EditUser';
 import ListSuppliers from '../pages/Suppliers/ListSuppliers';
 import AddSupplier from '../pages/Suppliers/AddSupplier';
 import EditSupplier from '../pages/Suppliers/EditSupplier';
+import ListCustomers from '../pages/Customers/ListCustomers';
+import AddCustomer from '../pages/Customers/AddCustomer';
+import EditCustomer from '../pages/Customers/EditCustomer';
+import CustomerDetails from '../pages/Customers/CustomerDetails';
 import Layout from '../components/common/Layout';
 
 export const routes = [
@@ -35,7 +43,17 @@ export const routes = [
   },
   {
     path: '/inventory',
-    element: <Layout><Inventory /></Layout>,
+    element: <Layout><ListProducts /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/inventory/add',
+    element: <Layout><AddProduct /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/inventory/:id/edit',
+    element: <Layout><EditProduct /></Layout>,
     protected: false,
   },
   {
@@ -46,6 +64,46 @@ export const routes = [
   {
     path: '/purchase',
     element: <Layout><Purchase /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/purchase',
+    element: <Layout><Purchase /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/purchase/add',
+    element: <Layout><OrderFormPage type="purchase" /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/purchase/:id',
+    element: <Layout><OrderDetailsPage type="purchase" /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/purchase/:id/edit',
+    element: <Layout><OrderFormPage type="purchase" mode="edit" /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/sales',
+    element: <Layout><Sales /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/sales/add',
+    element: <Layout><OrderFormPage type="sale" /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/sales/:id',
+    element: <Layout><OrderDetailsPage type="sale" /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/orders/sales/:id/edit',
+    element: <Layout><OrderFormPage type="sale" mode="edit" /></Layout>,
     protected: false,
   },
   {
@@ -61,6 +119,26 @@ export const routes = [
   {
     path: '/purchase/suppliers/:id/edit',
     element: <Layout><EditSupplier /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/customers',
+    element: <Layout><ListCustomers /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/customers/add',
+    element: <Layout><AddCustomer /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/customers/:id',
+    element: <Layout><CustomerDetails /></Layout>,
+    protected: false,
+  },
+  {
+    path: '/customers/:id/edit',
+    element: <Layout><EditCustomer /></Layout>,
     protected: false,
   },
   {

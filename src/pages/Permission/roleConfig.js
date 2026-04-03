@@ -1,13 +1,13 @@
 export const MODULES = [
   'dashboard',
   'inventory',
-  'sales',
-  'purchase',
   'reports',
   'roles',
   'users',
   'settings',
-  "suppliers"
+  "suppliers",
+  "orders",
+  "customers",
 ];
 
 export const AVAILABLE_ACTIONS = ['create', 'update', 'delete', 'get'];
